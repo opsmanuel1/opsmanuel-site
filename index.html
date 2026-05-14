@@ -1,69 +1,421 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>OpsManuel</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>OpsManuel | Symphony POS Support</title>
 
-<style>
-body{
-margin:0;
-font-family:Arial;
-background:#0f172a;
-color:white;
-text-align:center;
-}
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
 
-header{
-padding:100px 20px;
-}
+    html{
+      scroll-behavior:smooth;
+    }
 
-h1{
-font-size:50px;
-margin-bottom:10px;
-}
+    body{
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      color:#111;
+      background:#fff;
+      overflow-x:hidden;
+    }
 
-p{
-opacity:.8;
-}
+    img{
+      max-width:100%;
+      display:block;
+    }
 
-.btn{
-display:inline-block;
-margin-top:20px;
-padding:12px 20px;
-background:#00b67a;
-color:white;
-border-radius:10px;
-text-decoration:none;
-font-weight:bold;
-}
+    a{
+      text-decoration:none;
+    }
 
-section{
-padding:60px 20px;
-background:#111827;
-margin-top:40px;
-}
-</style>
+    .ops-one{
+      width:100%;
+    }
 
+    /* HERO */
+
+    .uk-hero{
+      background:linear-gradient(to bottom,#E6F6F2 0%,#E6F6F2 70%,#ffffff 100%);
+      padding:44px 0 24px;
+    }
+
+    .uk-hero__wrap{
+      width:min(1180px,92%);
+      margin:auto;
+    }
+
+    .uk-hero__nav{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      padding:8px 0 28px;
+    }
+
+    .uk-brand{
+      display:flex;
+      align-items:center;
+      gap:14px;
+    }
+
+    .uk-brand__text{
+      font-size:22px;
+      font-weight:950;
+      color:#111;
+    }
+
+    .uk-logo{
+      position:relative;
+      width:38px;
+      height:38px;
+      background:linear-gradient(145deg,#4fa3a8,#1f4f54);
+      clip-path:polygon(25% 6%,75% 6%,100% 50%,75% 94%,25% 94%,0% 50%);
+      box-shadow:0 12px 26px rgba(0,0,0,.35);
+    }
+
+    .uk-logo::after{
+      content:"";
+      position:absolute;
+      inset:7px;
+      background:#0e2b2f;
+      clip-path:inherit;
+    }
+
+    .uk-hero__links{
+      display:flex;
+      gap:22px;
+      align-items:center;
+      flex-wrap:wrap;
+    }
+
+    .uk-hero__links a{
+      color:#111;
+      font-size:14px;
+      font-weight:600;
+    }
+
+    .uk-hero__btn{
+      background:#00B67A;
+      color:#fff !important;
+      padding:12px 20px;
+      border-radius:12px;
+      font-weight:900;
+    }
+
+    .uk-hero__grid{
+      display:grid;
+      grid-template-columns:1.15fr .85fr;
+      gap:44px;
+      align-items:center;
+    }
+
+    .uk-hero__kicker{
+      color:#00B67A;
+      font-weight:900;
+      text-transform:uppercase;
+      font-size:13px;
+      margin-bottom:12px;
+    }
+
+    .uk-hero__h1{
+      font-size:clamp(40px,4.2vw,64px);
+      line-height:1.05;
+      font-weight:980;
+      margin-bottom:14px;
+    }
+
+    .uk-hero__p{
+      color:#4b4b4b;
+      line-height:1.7;
+      max-width:640px;
+      margin-bottom:18px;
+    }
+
+    .uk-hero__cta{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-top:12px;
+    }
+
+    .uk-hero__cta a{
+      padding:12px 18px;
+      border-radius:12px;
+      font-weight:900;
+    }
+
+    .uk-hero__ctaPrimary{
+      background:#0a3556;
+      color:#fff;
+    }
+
+    .uk-hero__ctaGhost{
+      border:2px solid rgba(10,53,86,.2);
+      color:#0a3556;
+    }
+
+    .uk-hero__card{
+      background:#fff;
+      border-radius:16px;
+      overflow:hidden;
+      box-shadow:0 18px 35px rgba(0,0,0,.14);
+    }
+
+    .uk-hero__mini{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:10px;
+      margin-top:18px;
+    }
+
+    .uk-hero__pill{
+      background:rgba(255,255,255,.75);
+      border:1px solid rgba(0,0,0,.06);
+      border-radius:999px;
+      padding:10px 12px;
+      font-size:12px;
+      font-weight:900;
+      text-align:center;
+    }
+
+    /* PACKAGES */
+
+    .uk-packs{
+      background:linear-gradient(to bottom,#ffffff 0%,#E6F6F2 35%,#E6F6F2 100%);
+      padding:40px 0 80px;
+    }
+
+    .uk-packs__wrap{
+      width:min(1180px,92%);
+      margin:auto;
+    }
+
+    .uk-packs__h2{
+      font-size:42px;
+      font-weight:980;
+      margin-bottom:12px;
+    }
+
+    .uk-packs__sub{
+      color:#4b4b4b;
+      line-height:1.7;
+      max-width:800px;
+    }
+
+    .uk-packs__grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:22px;
+      margin-top:24px;
+    }
+
+    .uk-packs__card{
+      background:#fff;
+      border-radius:18px;
+      overflow:hidden;
+      box-shadow:0 18px 35px rgba(0,0,0,.1);
+      transition:.2s ease;
+      display:flex;
+      flex-direction:column;
+    }
+
+    .uk-packs__card:hover{
+      transform:translateY(-6px);
+      box-shadow:0 26px 60px rgba(0,0,0,.14);
+    }
+
+    .uk-packs__img{
+      height:210px;
+      object-fit:cover;
+    }
+
+    .uk-packs__body{
+      padding:20px;
+      display:flex;
+      flex-direction:column;
+      flex:1;
+      gap:12px;
+    }
+
+    .uk-packs__kicker{
+      color:#00B67A;
+      font-size:13px;
+      font-weight:900;
+      text-transform:uppercase;
+    }
+
+    .uk-packs__h3{
+      font-size:22px;
+      line-height:1.2;
+      font-weight:980;
+    }
+
+    .uk-packs__desc{
+      color:#4b4b4b;
+      line-height:1.7;
+    }
+
+    .uk-packs__list{
+      padding-left:18px;
+      line-height:1.7;
+      color:#333;
+    }
+
+    .uk-packs__meta{
+      margin-top:auto;
+      padding-top:16px;
+      border-top:1px solid rgba(0,0,0,.06);
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+
+    .uk-packs__badge{
+      background:rgba(10,53,86,.08);
+      color:#0a3556;
+      padding:6px 10px;
+      border-radius:999px;
+      font-size:12px;
+      font-weight:900;
+    }
+
+    .uk-packs__btn{
+      background:#0a3556;
+      color:#fff;
+      padding:12px 16px;
+      border-radius:12px;
+      font-weight:900;
+    }
+
+    /* HOW */
+
+    .uk-how{
+      padding:20px 0 40px;
+    }
+
+    .uk-how__wrap{
+      width:min(1180px,92%);
+      margin:auto;
+    }
+
+    .uk-how__box{
+      background:#fff;
+      border-radius:18px;
+      padding:20px;
+      box-shadow:0 18px 35px rgba(0,0,0,.08);
+    }
+
+    .uk-how__grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:14px;
+      margin-top:16px;
+    }
+
+    .uk-how__step{
+      border:1px solid rgba(0,0,0,.06);
+      border-radius:14px;
+      padding:14px;
+    }
+
+    .uk-how__stepTitle{
+      font-weight:900;
+      margin-bottom:6px;
+    }
+
+    .uk-how__stepText{
+      color:#4b4b4b;
+      line-height:1.6;
+    }
+
+    /* CONTACT */
+
+    .uk-contact{
+      padding:70px 0 90px;
+    }
+
+    .uk-contact__wrap{
+      width:min(1180px,92%);
+      margin:auto;
+      display:flex;
+      justify-content:space-between;
+      gap:20px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+
+    .uk-contact__title{
+      font-size:30px;
+      font-weight:980;
+      margin-top:8px;
+    }
+
+    .uk-contact__text{
+      color:#4b4b4b;
+      margin-top:10px;
+      max-width:700px;
+      line-height:1.7;
+    }
+
+    .uk-contact__actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+
+    .uk-contact__primary,
+    .uk-contact__ghost{
+      padding:12px 16px;
+      border-radius:12px;
+      font-weight:900;
+    }
+
+    .uk-contact__primary{
+      background:#0a3556;
+      color:#fff;
+    }
+
+    .uk-contact__ghost{
+      border:2px solid rgba(10,53,86,.2);
+      color:#0a3556;
+    }
+
+    /* MOBILE */
+
+    @media(max-width:980px){
+
+      .uk-hero__grid,
+      .uk-packs__grid,
+      .uk-how__grid{
+        grid-template-columns:1fr;
+      }
+
+      .uk-hero__links a:not(.uk-hero__btn){
+        display:none;
+      }
+
+      .uk-hero__mini{
+        grid-template-columns:1fr;
+      }
+
+      .uk-hero__h1{
+        font-size:42px;
+      }
+    }
+
+  </style>
 </head>
 
 <body>
 
-<header>
-<h1>OpsManuel</h1>
-<p>Modern POS & Dijital Çözümler</p>
-<a class="btn" href="#contact">İletişime Geç</a>
-</header>
-
-<section>
-<h2>Hakkımızda</h2>
-<p>OpsManuel, POS sistemleri ve operasyonel çözümler sunar.</p>
-</section>
-
-<section id="contact">
-<h2>İletişim</h2>
-<p>Hızlı destek için bizimle iletişime geçin.</p>
-</section>
+  <!-- BURAYA SENİN HTML İÇERİĞİN GELECEK -->
+  <!-- mevcut sectionlarını buraya yapıştır -->
 
 </body>
 </html>
